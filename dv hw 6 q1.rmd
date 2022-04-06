@@ -1,0 +1,15 @@
+
+```{r}
+library(ggplot2)
+library(tidyr)
+
+load(file="house_prices.rda")
+ggplot(data=house_prices,aes(x=date,y=house_price_index))+geom_line()+facet_wrap(~ state)
+#date isn't numeric, so I'm not sure how to change x ticks.
+#scale_x_discrete(labels=c("1980"="80","2000"="00","2020"="20"))
+
+house_reshaped<-house_prices %>% gather(key="measure",value="value",3:4)
+
+ggplot(data=house_reshaped,aes(x=date,y=value,group=measure))+geom_line()+facet_wrap(~ state)
+#Can't really tell the change with employ_perc.
+```
